@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "SalesFlow AI",
+  "version": "1.0",
+  "description": "AI assistant for WhatsApp Web",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://api.groq.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [],
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ]
+    }
+  ]
+}
