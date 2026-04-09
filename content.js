@@ -6,23 +6,55 @@ let PRICE_3 = "";
 let PRODUCT_NAME = "";
 let DROPI_URL = "";
 
-const MESSAGE_DATA = `Para continuar con tu compra, por favor envíame los siguientes datos *EN UN SOLO MENSAJE Y EN EL MISMO ORDEN*:
+const MESSAGES = {
+  WELCOME: () => `La *Cinta Aislante Líquida* te ofrece:
 
-1. *NOMBRES* 🧑
+✅ Aislamiento eléctrico seguro
+✅ Impermeabilidad total
+✅ Recubrimiento flexible y duradero
+✅ Fácil aplicación
+✅ Resistencia al calor y condiciones extremas
 
-2. *APELLIDOS* 👤
+¿Te gustaría saber cómo funciona? 🛠️`,
 
-3. *CELULAR* 📱
+  PRICES: () => `🔥 *Ofertas especiales* 🔥
 
-4. *DIRECCIÓN EXACTA* como aparece en tu recibo público o si reclamas en oficina escribe en este campo *OFICINA* 📍 
+1️⃣ Unidad – *${PRICE_1}*
+2️⃣ Unidades – *${PRICE_2}* (Más vendido)
+3️⃣ Unidades – *${PRICE_3}* (Más ahorro)
 
-5. *CIUDAD* 🌆 
+🚚 Envío totalmente *GRATIS*.
+💳 Puedes pagar *al recibir* o por transferencia bancaria.
 
-6. *DEPARTAMENTO* 🗺️ 
+¿Cuantos deseas ordenar antes de que se agoten? 😊`,
 
-7. *¿CUÁNTAS UNIDADES DESEAS?* 🔢`;
+  DATA_REQUEST: () => `Para agendar tu envío, por favor comparteme:
 
-const MESSAGE_CONFIRMATION = `¡Excelente! Tu pedido de *${PRODUCT_NAME}* 🛍🤩 está confirmado. Recibirás tu orden en *4 a 5 días hábiles* 🤩. ¡Gracias por confiar en Offerti! 🙌. El número de tu guía será enviado apenas sea generado. Cualquier inquietud no dudes en preguntar.`;
+✅ *Nombres*
+✅ *Apellidos*
+✅ *Celular*
+✅ *Dirección exacta* como aparece en tu recibo público o si reclamas en oficina escribe en este campo *Oficina* 📍
+✅ *Barrio* 
+✅ *Ciudad* 
+✅ *Departamento*
+✅ *Número de unidades a ordenar*
+
+¿Me ayudas con los datos y dejamos tu envío asegurado ya mismo? 🙌`,
+
+  CONFIRMATION: () => `✅ *¡Tu pedido está confirmado!* 🛍
+
+Has confirmado tu orden de *Cinta Aislante Líquida*.
+
+🚚 *Tiempo de entrega:* 4 a 5 días hábiles
+📦 *Seguimiento:* Te enviaremos el número de guía apenas esté disponible
+📲 *Estado del pedido:* Te mantendremos informado en todo momento
+
+✨ Gracias por confiar en *Offerti*
+
+Si tienes alguna duda, no dudes en escribirnos 😊
+`
+};
+
 
 //  Inyección de archivos
 
@@ -289,6 +321,10 @@ window.addEventListener("load", () => {
     #ri-generate-btn.loading .ri-btn-icon { animation: ri-spin 0.8s linear infinite; display: inline-block; }
     @keyframes ri-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+    /* Bienvenida */
+    #ri-welcome-btn { background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.25); }
+    #ri-welcome-btn:hover { background: rgba(255,107,107,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,107,0.18); }
+
     /* Precios */
     #ri-precios-btn { background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.25); }
     #ri-precios-btn:hover { background: rgba(251,191,36,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(251,191,36,0.18); }
@@ -419,14 +455,17 @@ window.addEventListener("load", () => {
             <span class="ri-btn-label">Generar respuesta con IA</span>
           </div>
         </button>
+        <button id="ri-welcome-btn" class="ri-btn">
+          <span>1. Bienvenida</span><span>🧡</span>
+        </button>
         <button id="ri-precios-btn" class="ri-btn">
-          <span>💰</span><span>Enviar precios</span>
+          <span>2. Enviar precios</span><span>💰</span>
         </button>
         <button id="ri-datos-btn" class="ri-btn">
-          <span>📋</span><span>Pedir datos</span>
+          <span>3. Pedir datos</span><span>📋</span>
         </button>
         <button id="ri-confirmar-btn" class="ri-btn">
-          <span>✅</span><span>Confirmar pedido</span>
+          <span>4. Confirmar pedido</span><span>✅</span>
         </button>
       </div>
 
@@ -723,6 +762,10 @@ window.addEventListener("load", () => {
     }
   });
 
+  document.getElementById("ri-welcome-btn").addEventListener("click", async () => {
+    await typeMessageInInput(MESSAGES.WELCOME());
+  });
+
   document
     .getElementById("ri-precios-btn")
     .addEventListener(
@@ -732,15 +775,14 @@ window.addEventListener("load", () => {
           alert("⚠️ Por favor, configura los precios en la pestaña Config antes de enviarlos ⚠️");
           return;
         }
-        const msg = `¡Claro! Aquí tienes los precios del *${PRODUCT_NAME.toUpperCase()}:*\n\n1. Unidad – *${PRICE_1}* + ENVÍO GRATIS 🎁\n2. Unidades – *${PRICE_2}* + ENVÍO GRATIS 🎁\n3. Unidades – *${PRICE_3}* + ENVÍO GRATIS 🎁\n\n🚚 Tu pedido llega de *4 a 5 días hábiles*.\n💳 Puedes pagar *al recibir* y el envío es totalmente *GRATIS*.\n\n¿Confírmame tu ciudad y departamento? 😊`;
-        await typeMessageInInput(msg);
+        await typeMessageInInput(MESSAGES.PRICES());
       }
     );
   document
     .getElementById("ri-datos-btn")
     .addEventListener(
       "click",
-      async () => await typeMessageInInput(MESSAGE_DATA),
+      async () => await typeMessageInInput(MESSAGES.DATA_REQUEST()),
     );
 
   document
@@ -748,8 +790,7 @@ window.addEventListener("load", () => {
     .addEventListener(
       "click",
       async () => {
-        const msg = `¡Excelente! Tu pedido de *${PRODUCT_NAME}* 🛍 está confirmado. Recibirás tu orden en *4 a 5 días hábiles* 🤩. ¡Gracias por confiar en *Offerti*! ✨. El número de tu guía será enviado apenas sea generado. Cualquier inquietud no dudes en preguntar.`;
-        await typeMessageInInput(msg);
+        await typeMessageInInput(MESSAGES.CONFIRMATION());
       }
     );
 
