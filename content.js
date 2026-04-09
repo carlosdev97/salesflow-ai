@@ -45,16 +45,21 @@ const MESSAGES = {
 
 Has confirmado tu orden de *Cinta Aislante Líquida*.
 
-🚚 *Tiempo de entrega:* 4 a 5 días hábiles
+🚚 *Entrega:* 4 a 5 días hábiles
 📦 *Seguimiento:* Te enviaremos el número de guía apenas esté disponible
 📲 *Estado del pedido:* Te mantendremos informado en todo momento
 
-✨ Gracias por confiar en *Offerti*
+✨ Gracias por confiar en *Offerti* ⭐
 
 Si tienes alguna duda, no dudes en escribirnos 😊
-`
-};
+`,
 
+  REMARKETING: () => `🔴 *Ultimas 4 unidades* 🔴
+  
+Solo quedan 4 unidades de *${PRODUCT_NAME}* y hay 6 personas en lista de espera. Hemos apartado tu pedido y estamos emocionados por tu respuesta.
+  
+¿Te gustaría confirmar tu compra? 🛒`
+};
 
 //  Inyección de archivos
 
@@ -139,8 +144,6 @@ function isChatOpen() {
   );
 }
 
-//  Helpers
-
 function readFileAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -189,38 +192,38 @@ window.addEventListener("load", () => {
       border-bottom: 1px solid rgba(255,255,255,0.05);
       flex-shrink: 0;
     }
-    #salesflow-ai-header .ri-icon {
+    #salesflow-ai-header .sf-icon {
       font-size: 16px; line-height: 1;
     }
-    #salesflow-ai-header .ri-title {
+    #salesflow-ai-header .sf-title {
       font-size: 12.5px; font-weight: 700;
       letter-spacing: -0.02em; color: #f0f0f8;
       flex: 1;
     }
-    #salesflow-ai-header .ri-title span {
+    #salesflow-ai-header .sf-title span {
       font-weight: 400; color: rgba(255,255,255,0.3); font-size: 11px;
     }
 
     /* Status dot */
-    #ri-status-dot {
+    #sf-status-dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: #ef4444;
       box-shadow: 0 0 6px rgba(239,68,68,0.7);
       flex-shrink: 0;
       transition: background 0.4s, box-shadow 0.4s;
     }
-    #ri-status-dot.online {
+    #sf-status-dot.online {
       background: #22c55e;
       box-shadow: 0 0 8px rgba(34,197,94,0.8);
-      animation: ri-pulse 2.5s ease-in-out infinite;
+      animation: sf-pulse 2.5s ease-in-out infinite;
     }
-    @keyframes ri-pulse {
+    @keyframes sf-pulse {
       0%,100% { box-shadow: 0 0 8px 2px rgba(34,197,94,0.7); }
       50%      { box-shadow: 0 0 2px 0px rgba(34,197,94,0.1); }
     }
 
     /* Minimizar */
-    #ri-minimize-btn {
+    #sf-minimize-btn {
       width: 22px; height: 22px; border-radius: 6px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
@@ -231,19 +234,19 @@ window.addEventListener("load", () => {
       transition: background 0.15s, color 0.15s;
       flex-shrink: 0;
     }
-    #ri-minimize-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    #sf-minimize-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
     /* ── Body ── */
     #salesflow-ai-body { padding: 0 0 12px; }
 
     /* ── Tabs ── */
-    #ri-tabs {
+    #sf-tabs {
       display: flex;
       padding: 10px 12px 0;
       gap: 4px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .ri-tab {
+    .sf-tab {
       flex: 1;
       padding: 7px 4px;
       font-size: 11px; font-weight: 600;
@@ -258,8 +261,8 @@ window.addEventListener("load", () => {
       position: relative;
       bottom: -1px;
     }
-    .ri-tab:hover { color: rgba(255,255,255,0.6); }
-    .ri-tab.active {
+    .sf-tab:hover { color: rgba(255,255,255,0.6); }
+    .sf-tab.active {
       color: #e8e8f0;
       background: rgba(255,255,255,0.04);
       border-color: rgba(255,255,255,0.07);
@@ -267,16 +270,16 @@ window.addEventListener("load", () => {
     }
 
     /* ── Tab panels ── */
-    .ri-panel { display: none; padding: 13px 12px 0; }
-    .ri-panel.active { display: flex; flex-direction: column; gap: 7px; }
+    .sf-panel { display: none; padding: 13px 12px 0; }
+    .sf-panel.active { display: flex; flex-direction: column; gap: 7px; }
 
     /* ── Textarea ── */
-    #ri-audio-wrap .ri-label {
+    #sf-audio-wrap .sf-label {
       font-size: 10px; font-weight: 500;
       color: rgba(255,255,255,0.3);
       margin-bottom: 5px; letter-spacing: 0.03em; text-transform: uppercase;
     }
-    #ri-audio-input {
+    #sf-audio-input {
       width: 100%; box-sizing: border-box;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -287,12 +290,12 @@ window.addEventListener("load", () => {
       transition: border-color 0.2s, background 0.2s;
       cursor: text;
     }
-    #ri-audio-input::placeholder { color: rgba(255,255,255,0.18); font-size: 12px; font-family: 'Inter', system-ui, sans-serif; }
-    #ri-audio-input:focus { border-color: rgba(139,92,246,0.45); background: rgba(139,92,246,0.05); }
-    #ri-audio-input.has-content { border-color: rgba(139,92,246,0.35); background: rgba(139,92,246,0.06); }
+    #sf-audio-input::placeholder { color: rgba(255,255,255,0.18); font-size: 12px; font-family: 'Inter', system-ui, sans-serif; }
+    #sf-audio-input:focus { border-color: rgba(139,92,246,0.45); background: rgba(139,92,246,0.05); }
+    #sf-audio-input.has-content { border-color: rgba(139,92,246,0.35); background: rgba(139,92,246,0.06); }
 
     /* ── Botones generales ── */
-    .ri-btn {
+    .sf-btn {
       border: none; border-radius: 9px;
       padding: 10px 14px; font-size: 12.5px; font-weight: 600;
       font-family: 'Inter', system-ui, sans-serif;
@@ -301,76 +304,87 @@ window.addEventListener("load", () => {
       transition: transform 0.1s, box-shadow 0.2s, opacity 0.2s;
       position: relative; overflow: hidden; color: #fff;
     }
-    .ri-btn:active { transform: scale(0.98); }
+    .sf-btn:active { transform: scale(0.98); }
 
     /* IA */
-    #ri-generate-btn {
+    #sf-generate-btn {
       background: transparent;
       box-shadow: 0 2px 10px rgba(100,80,255,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
     }
-    #ri-generate-btn::before {
+    #sf-generate-btn::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, #8b5cf6, #3b82f6, #06b6d4, #a855f7, #6366f1);
       background-size: 300% 100%;
-      animation: ri-sweep 4s linear infinite; z-index: 0;
+      animation: sf-sweep 4s linear infinite; z-index: 0;
     }
-    @keyframes ri-sweep { 0% { background-position:0% 50%; } 100% { background-position:300% 50%; } }
-    #ri-generate-btn .ri-btn-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 6px; }
-    #ri-generate-btn:hover { box-shadow: 0 5px 18px rgba(100,80,255,0.5), inset 0 1px 0 rgba(255,255,255,0.18); transform: translateY(-1px); }
-    #ri-generate-btn.loading { opacity: 0.7; pointer-events: none; }
-    #ri-generate-btn.loading .ri-btn-icon { animation: ri-spin 0.8s linear infinite; display: inline-block; }
-    @keyframes ri-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes sf-sweep { 0% { background-position:0% 50%; } 100% { background-position:300% 50%; } }
+    #sf-generate-btn .sf-btn-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 6px; }
+    #sf-generate-btn:hover { box-shadow: 0 5px 18px rgba(100,80,255,0.5), inset 0 1px 0 rgba(255,255,255,0.18); transform: translateY(-1px); }
+    #sf-generate-btn.loading { opacity: 0.7; pointer-events: none; }
+    #sf-generate-btn.loading .sf-btn-icon { animation: sf-spin 0.8s linear infinite; display: inline-block; }
+    @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+    /* Limpiar campo (COLOR DIFERENTE PERO MISMO ESTILO) */
+    #sf-remarketing-btn { 
+      background: rgba(20, 184, 166, 0.12); 
+      border: 1px solid rgba(20, 184, 166, 0.25); 
+    }
+    #sf-remarketing-btn:hover { 
+      background: rgba(20, 184, 166, 0.22); 
+      transform: translateY(-1px); 
+      box-shadow: 0 4px 12px rgba(20, 184, 166, 0.18); 
+    }
+    
     /* Bienvenida */
-    #ri-welcome-btn { background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.25); }
-    #ri-welcome-btn:hover { background: rgba(255,107,107,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,107,0.18); }
+    #sf-welcome-btn { background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.25); }
+    #sf-welcome-btn:hover { background: rgba(255,107,107,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,107,0.18); }
 
     /* Precios */
-    #ri-precios-btn { background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.25); }
-    #ri-precios-btn:hover { background: rgba(251,191,36,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(251,191,36,0.18); }
+    #sf-precios-btn { background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.25); }
+    #sf-precios-btn:hover { background: rgba(251,191,36,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(251,191,36,0.18); }
 
     /* Datos */
-    #ri-datos-btn { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25); }
-    #ri-datos-btn:hover { background: rgba(34,197,94,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.18); }
+    #sf-datos-btn { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25); }
+    #sf-datos-btn:hover { background: rgba(34,197,94,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.18); }
 
     /* Enviar media */
-    .ri-send-btn {
+    .sf-send-btn {
       background: rgba(99,102,241,0.12);
       border: 1px solid rgba(99,102,241,0.25);
       opacity: 0.4; pointer-events: none;
     }
-    .ri-send-btn.ready { opacity: 1; pointer-events: auto; }
-    .ri-send-btn.ready:hover { background: rgba(99,102,241,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.2); }
+    .sf-send-btn.ready { opacity: 1; pointer-events: auto; }
+    .sf-send-btn.ready:hover { background: rgba(99,102,241,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.2); }
 
     /* Dropi */
-    #ri-dropi-btn { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.25); }
-    #ri-dropi-btn:hover { background: rgba(249,115,22,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249,115,22,0.18); }
+    #sf-dropi-btn { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.25); }
+    #sf-dropi-btn:hover { background: rgba(249,115,22,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249,115,22,0.18); }
 
     /* Confirmar pedido */
-    #ri-confirmar-btn { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25); }
-    #ri-confirmar-btn:hover { background: rgba(168,85,247,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(168,85,247,0.18); }
+    #sf-confirmar-btn { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25); }
+    #sf-confirmar-btn:hover { background: rgba(168,85,247,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(168,85,247,0.18); }
 
     /* ── Media slots ── */
-    .ri-media-slot {
+    .sf-media-slot {
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
       padding: 9px 10px;
       display: flex; flex-direction: column; gap: 6px;
     }
-    .ri-slot-header {
+    .sf-slot-header {
       display: flex; align-items: center; justify-content: space-between;
     }
-    .ri-slot-label {
+    .sf-slot-label {
       font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
       text-transform: uppercase; color: rgba(255,255,255,0.3);
     }
-    .ri-slot-count {
+    .sf-slot-count {
       font-size: 10px; color: rgba(255,255,255,0.25);
     }
-    .ri-slot-count.has-files { color: #818cf8; }
+    .sf-slot-count.has-files { color: #818cf8; }
 
-    .ri-drop-zone {
+    .sf-drop-zone {
       background: rgba(255,255,255,0.03);
       border: 1px dashed rgba(255,255,255,0.1);
       border-radius: 7px;
@@ -379,33 +393,33 @@ window.addEventListener("load", () => {
       text-align: center; cursor: pointer;
       transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
-    .ri-drop-zone:hover, .ri-drop-zone.drag-over {
+    .sf-drop-zone:hover, .sf-drop-zone.drag-over {
       border-color: rgba(129,140,248,0.4);
       background: rgba(129,140,248,0.06);
       color: rgba(255,255,255,0.55);
     }
 
-    .ri-file-list { display: flex; flex-direction: column; gap: 3px; }
-    .ri-file-item {
+    .sf-file-list { display: flex; flex-direction: column; gap: 3px; }
+    .sf-file-item {
       display: flex; align-items: center; gap: 5px;
       background: rgba(255,255,255,0.04);
       border-radius: 6px; padding: 4px 7px;
       font-size: 10.5px; color: rgba(255,255,255,0.5);
     }
-    .ri-file-item .ri-fname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .ri-file-item .ri-fremove {
+    .sf-file-item .sf-fname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sf-file-item .sf-fremove {
       cursor: pointer; color: rgba(255,255,255,0.2); font-size: 12px;
       flex-shrink: 0; transition: color 0.15s; line-height: 1;
     }
-    .ri-file-item .ri-fremove:hover { color: rgba(239,68,68,0.8); }
+    .sf-file-item .sf-fremove:hover { color: rgba(239,68,68,0.8); }
 
     /* ── Dropi & Config panel ── */
-    .ri-label {
+    .sf-label {
       font-size: 10px; font-weight: 500;
       color: rgba(255,255,255,0.3);
       margin-bottom: 5px; letter-spacing: 0.03em; text-transform: uppercase;
     }
-    #salesflow-ai .ri-input-text, #salesflow-ai .ri-input-textarea {
+    #salesflow-ai .sf-input-text, #salesflow-ai .sf-input-textarea {
       width: 100%; box-sizing: border-box;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -415,12 +429,12 @@ window.addEventListener("load", () => {
       transition: border-color 0.2s;
       cursor: text;
     }
-    #salesflow-ai .ri-input-textarea { resize: none; }
-    #salesflow-ai .ri-input-text::placeholder, #salesflow-ai .ri-input-textarea::placeholder { color: rgba(255,255,255,0.18); font-size: 12px; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; }
-    #salesflow-ai .ri-input-text:focus, #salesflow-ai .ri-input-textarea:focus { border-color: rgba(249,115,22,0.45); }
+    #salesflow-ai .sf-input-textarea { resize: none; }
+    #salesflow-ai .sf-input-text::placeholder, #salesflow-ai .sf-input-textarea::placeholder { color: rgba(255,255,255,0.18); font-size: 12px; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; }
+    #salesflow-ai .sf-input-text:focus, #salesflow-ai .sf-input-textarea:focus { border-color: rgba(249,115,22,0.45); }
 
-    #ri-config-save-btn { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);}
-    #ri-config-save-btn:hover { background: rgba(34,197,94,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.18);}
+    #sf-config-save-btn { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.25);}
+    #sf-config-save-btn:hover { background: rgba(34,197,94,0.22); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.18);}
     `;
   document.head.appendChild(style);
 
@@ -429,61 +443,64 @@ window.addEventListener("load", () => {
   win.id = "salesflow-ai";
   win.innerHTML = `
     <div id="salesflow-ai-header">
-      <span class="ri-icon">⚡</span>
-      <span class="ri-title">SalesFlow AI <span>· Asistente</span></span>
-      <div id="ri-status-dot" title="Estado del chat"></div>
-      <button id="ri-minimize-btn" title="Minimizar">−</button>
+      <span class="sf-icon">⚡</span>
+      <span class="sf-title">SalesFlow AI <span>· Asistente</span></span>
+      <div id="sf-status-dot" title="Estado del chat"></div>
+      <button id="sf-minimize-btn" title="Minimizar">−</button>
     </div>
 
     <div id="salesflow-ai-body">
       <!-- TABS -->
-      <div id="ri-tabs">
-        <div class="ri-tab active" data-tab="ia">🤖 IA</div>
-        <div class="ri-tab" data-tab="media">🖼️ Media</div>
-        <div class="ri-tab" data-tab="dropi">⚙️ Config</div>
+      <div id="sf-tabs">
+        <div class="sf-tab active" data-tab="ia">🤖 IA</div>
+        <div class="sf-tab" data-tab="media">🖼️ Media</div>
+        <div class="sf-tab" data-tab="dropi">⚙️ Config</div>
       </div>
 
       <!-- PANEL 1: IA -->
-      <div class="ri-panel active" id="ri-panel-ia">
-        <div id="ri-audio-wrap">
-          <div class="ri-label">🎙️ Transcripción de audio</div>
-          <textarea id="ri-audio-input" placeholder="Escribe lo que dijo el cliente..."></textarea>
+      <div class="sf-panel active" id="sf-panel-ia">
+        <div id="sf-audio-wrap">
+          <div class="sf-label">🎙️ Transcripción de audio</div>
+          <textarea id="sf-audio-input" placeholder="Escribe lo que dijo el cliente..."></textarea>
         </div>
-        <button id="ri-generate-btn" class="ri-btn">
-          <div class="ri-btn-inner">
-            <span class="ri-btn-icon">✨</span>
-            <span class="ri-btn-label">Generar respuesta con IA</span>
+        <button id="sf-generate-btn" class="sf-btn">
+          <div class="sf-btn-inner">
+            <span class="sf-btn-icon">✨</span>
+            <span class="sf-btn-label">Generar respuesta con IA</span>
           </div>
         </button>
-        <button id="ri-welcome-btn" class="ri-btn">
-          <span>1. Bienvenida</span><span>🧡</span>
+        <button id="sf-welcome-btn" class="sf-btn">
+          <span>1. Enviar descripción</span><span>📝</span>
         </button>
-        <button id="ri-precios-btn" class="ri-btn">
+        <button id="sf-precios-btn" class="sf-btn">
           <span>2. Enviar precios</span><span>💰</span>
         </button>
-        <button id="ri-datos-btn" class="ri-btn">
+        <button id="sf-datos-btn" class="sf-btn">
           <span>3. Pedir datos</span><span>📋</span>
         </button>
-        <button id="ri-confirmar-btn" class="ri-btn">
+        <button id="sf-confirmar-btn" class="sf-btn">
           <span>4. Confirmar pedido</span><span>✅</span>
+        </button>
+        <button id="sf-remarketing-btn" class="sf-btn">
+          <span>5. Remarketing</span><span>💬</span>
         </button>
       </div>
 
       <!-- PANEL 2: MEDIA (3 slots) -->
-      <div class="ri-panel" id="ri-panel-media">
+      <div class="sf-panel" id="sf-panel-media">
         ${[1, 2, 3]
       .map(
         (n) => `
-        <div class="ri-media-slot" id="ri-slot-${n}">
-          <div class="ri-slot-header">
-            <span class="ri-slot-label">Slot ${n}</span>
-            <span class="ri-slot-count" id="ri-slot-count-${n}">sin archivos</span>
+        <div class="sf-media-slot" id="sf-slot-${n}">
+          <div class="sf-slot-header">
+            <span class="sf-slot-label">Slot ${n}</span>
+            <span class="sf-slot-count" id="sf-slot-count-${n}">sin archivos</span>
           </div>
-          <input type="file" id="ri-input-${n}" multiple accept="image/*,video/*" style="display:none">
-          <div class="ri-drop-zone" id="ri-drop-${n}">＋ Seleccionar / soltar archivos</div>
-          <div class="ri-file-list" id="ri-flist-${n}"></div>
-          <button class="ri-btn ri-send-btn" id="ri-send-${n}">
-            <span>📤</span><span class="ri-send-label">Enviar al chat actual</span>
+          <input type="file" id="sf-input-${n}" multiple accept="image/*,video/*" style="display:none">
+          <div class="sf-drop-zone" id="sf-drop-${n}">＋ Seleccionar / soltar archivos</div>
+          <div class="sf-file-list" id="sf-flist-${n}"></div>
+          <button class="sf-btn sf-send-btn" id="sf-send-${n}">
+            <span>📤</span><span class="sf-send-label">Enviar al chat actual</span>
           </button>
         </div>`,
       )
@@ -491,45 +508,45 @@ window.addEventListener("load", () => {
       </div>
 
       <!-- PANEL 3: DROPI & CONFIG -->
-      <div class="ri-panel" id="ri-panel-dropi">
-        <div id="ri-config-wrap" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px;">
+      <div class="sf-panel" id="sf-panel-dropi">
+        <div id="sf-config-wrap" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px;">
           <div>
-            <div class="ri-label">🔑 API Key</div>
-            <input type="text" id="ri-config-apikey" class="ri-input-text" placeholder="gsk_..." />
+            <div class="sf-label">🔑 API Key</div>
+            <input type="text" id="sf-config-apikey" class="sf-input-text" placeholder="gsk_..." />
           </div>
           <div>
-            <div class="ri-label">📦 Nombre del producto</div>
-            <input type="text" id="ri-config-product-name" class="ri-input-text" placeholder="Nombre para confirmación..." />
+            <div class="sf-label">📦 Nombre del producto</div>
+            <input type="text" id="sf-config-product-name" class="sf-input-text" placeholder="Nombre para confirmación..." />
           </div>
           <div>
-            <div class="ri-label">📝 Prompt</div>
-            <textarea id="ri-config-prompt" class="ri-input-textarea" placeholder="Escribe el prompt..." style="min-height: 80px;"></textarea>
+            <div class="sf-label">📝 Prompt</div>
+            <textarea id="sf-config-prompt" class="sf-input-textarea" placeholder="Escribe el prompt..." style="min-height: 80px;"></textarea>
           </div>
           <div style="display: flex; gap: 4px;">
             <div style="flex:1;">
-              <div class="ri-label">Precio 1</div>
-              <input type="text" id="ri-config-price1" class="ri-input-text" placeholder="$79.900" />
+              <div class="sf-label">Precio 1</div>
+              <input type="text" id="sf-config-price1" class="sf-input-text" placeholder="$79.900" />
             </div>
             <div style="flex:1;">
-              <div class="ri-label">Precio 2</div>
-              <input type="text" id="ri-config-price2" class="ri-input-text" placeholder="$104.900" />
+              <div class="sf-label">Precio 2</div>
+              <input type="text" id="sf-config-price2" class="sf-input-text" placeholder="$104.900" />
             </div>
             <div style="flex:1;">
-              <div class="ri-label">Precio 3</div>
-              <input type="text" id="ri-config-price3" class="ri-input-text" placeholder="$124.900" />
+              <div class="sf-label">Precio 3</div>
+              <input type="text" id="sf-config-price3" class="sf-input-text" placeholder="$124.900" />
             </div>
           </div>
         </div>
 
-        <div id="ri-dropi-input-wrap" style="margin-bottom: 8px;">
-          <div class="ri-label">🔗 Enlace del producto en Dropi</div>
-          <input type="text" id="ri-dropi-url" class="ri-input-text" placeholder="https://dropi.co/productos/...">
+        <div id="sf-dropi-input-wrap" style="margin-bottom: 8px;">
+          <div class="sf-label">🔗 Enlace del producto en Dropi</div>
+          <input type="text" id="sf-dropi-url" class="sf-input-text" placeholder="https://dropi.co/productos/...">
         </div>
-        <button id="ri-dropi-btn" class="ri-btn">
+        <button id="sf-dropi-btn" class="sf-btn">
           <span>🚀</span><span>Enviar a cliente</span>
         </button>
 
-        <button id="ri-config-save-btn" class="ri-btn">
+        <button id="sf-config-save-btn" class="sf-btn">
           <span>💾</span><span>Guardar Configuración</span>
         </button>
       </div>
@@ -538,7 +555,7 @@ window.addEventListener("load", () => {
   document.body.appendChild(win);
 
   // ── MINIMIZAR ─────────────────────────────────────────────
-  const minimizeBtn = document.getElementById("ri-minimize-btn");
+  const minimizeBtn = document.getElementById("sf-minimize-btn");
   minimizeBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     win.classList.toggle("minimized");
@@ -546,30 +563,30 @@ window.addEventListener("load", () => {
   });
 
   // ── ESTADO DEL CHAT (dot) ─────────────────────────────────
-  const statusDot = document.getElementById("ri-status-dot");
+  const statusDot = document.getElementById("sf-status-dot");
 
   function updateChatStatus() {
     const active = isChatOpen();
     statusDot.classList.toggle("online", active);
-    statusDot.title = active ? "Chat activo" : "Sin chat activo";
+    statusDot.title = active ? "Chat activo" : "Chat inactivo";
   }
 
   updateChatStatus();
-  setInterval(updateChatStatus, 1500);
+  setInterval(updateChatStatus, 1000);
 
   // ── TABS ──────────────────────────────────────────────────
-  document.querySelectorAll(".ri-tab").forEach((tab) => {
+  document.querySelectorAll(".sf-tab").forEach((tab) => {
     tab.addEventListener("click", (e) => {
       e.stopPropagation();
       document
-        .querySelectorAll(".ri-tab")
+        .querySelectorAll(".sf-tab")
         .forEach((t) => t.classList.remove("active"));
       document
-        .querySelectorAll(".ri-panel")
+        .querySelectorAll(".sf-panel")
         .forEach((p) => p.classList.remove("active"));
       tab.classList.add("active");
       document
-        .getElementById(`ri-panel-${tab.dataset.tab}`)
+        .getElementById(`sf-panel-${tab.dataset.tab}`)
         .classList.add("active");
     });
   });
@@ -584,7 +601,7 @@ window.addEventListener("load", () => {
     win.addEventListener("mousedown", (e) => {
       if (
         e.target.closest(
-          "button, textarea, input, .ri-drop-zone, .ri-file-list, .ri-tab",
+          "button, textarea, input, .sf-drop-zone, .sf-file-list, .sf-tab",
         )
       )
         return;
@@ -615,7 +632,7 @@ window.addEventListener("load", () => {
       (e) => {
         if (
           e.target.closest(
-            "button, textarea, input, .ri-drop-zone, .ri-file-list, .ri-tab",
+            "button, textarea, input, .sf-drop-zone, .sf-file-list, .sf-tab",
           )
         )
           return;
@@ -653,6 +670,10 @@ window.addEventListener("load", () => {
 
   // ── FUNCIÓN: escribir en WhatsApp ─────────────────────────
   async function typeMessageInInput(text) {
+    if (!isChatOpen()) {
+      alert("⚠️ Primero debes elegir una conversación ⚠️");
+      return;
+    }
     const messageInput = document.querySelector(
       "div[data-tab='10'][contenteditable='true']",
     );
@@ -694,7 +715,7 @@ window.addEventListener("load", () => {
   }
 
   // ── PANEL IA ─────────────────────────────────────────────
-  const audioInput = document.getElementById("ri-audio-input");
+  const audioInput = document.getElementById("sf-audio-input");
   audioInput.addEventListener("input", () =>
     audioInput.classList.toggle(
       "has-content",
@@ -703,14 +724,14 @@ window.addEventListener("load", () => {
   );
   audioInput.addEventListener("mousedown", (e) => e.stopPropagation());
 
-  const generateBtn = document.getElementById("ri-generate-btn");
+  const generateBtn = document.getElementById("sf-generate-btn");
   generateBtn.addEventListener("click", async () => {
     if (!API_KEY || !CUSTOM_PROMPT) {
       alert("⚠️ Por favor, configura la API Key y el Prompt en la pestaña Dropi antes de generar una respuesta ⚠️");
       return;
     }
     generateBtn.classList.add("loading");
-    generateBtn.querySelector(".ri-btn-icon").textContent = "⟳";
+    generateBtn.querySelector(".sf-btn-icon").textContent = "⟳";
     try {
       let conversationContext = "";
       const allMessages = Array.from(document.querySelectorAll(".copyable-text")).filter(el => el.getAttribute("data-pre-plain-text"));
@@ -758,16 +779,16 @@ window.addEventListener("load", () => {
       console.error("Error IA:", err);
     } finally {
       generateBtn.classList.remove("loading");
-      generateBtn.querySelector(".ri-btn-icon").textContent = "✨";
+      generateBtn.querySelector(".sf-btn-icon").textContent = "✨";
     }
   });
 
-  document.getElementById("ri-welcome-btn").addEventListener("click", async () => {
+  document.getElementById("sf-welcome-btn").addEventListener("click", async () => {
     await typeMessageInInput(MESSAGES.WELCOME());
   });
 
   document
-    .getElementById("ri-precios-btn")
+    .getElementById("sf-precios-btn")
     .addEventListener(
       "click",
       async () => {
@@ -779,14 +800,14 @@ window.addEventListener("load", () => {
       }
     );
   document
-    .getElementById("ri-datos-btn")
+    .getElementById("sf-datos-btn")
     .addEventListener(
       "click",
       async () => await typeMessageInInput(MESSAGES.DATA_REQUEST()),
     );
 
   document
-    .getElementById("ri-confirmar-btn")
+    .getElementById("sf-confirmar-btn")
     .addEventListener(
       "click",
       async () => {
@@ -794,14 +815,23 @@ window.addEventListener("load", () => {
       }
     );
 
+  document
+    .getElementById("sf-remarketing-btn")
+    .addEventListener(
+      "click",
+      async () => {
+        await typeMessageInInput(MESSAGES.REMARKETING());
+      }
+    );
+
   // ── PANEL MEDIA (3 slots) ─────────────────────────────────
   function setupSlot(n) {
     const idx = n - 1;
-    const fileInput = document.getElementById(`ri-input-${n}`);
-    const dropZone = document.getElementById(`ri-drop-${n}`);
-    const fileList = document.getElementById(`ri-flist-${n}`);
-    const sendBtn = document.getElementById(`ri-send-${n}`);
-    const countLabel = document.getElementById(`ri-slot-count-${n}`);
+    const fileInput = document.getElementById(`sf-input-${n}`);
+    const dropZone = document.getElementById(`sf-drop-${n}`);
+    const fileList = document.getElementById(`sf-flist-${n}`);
+    const sendBtn = document.getElementById(`sf-send-${n}`);
+    const countLabel = document.getElementById(`sf-slot-count-${n}`);
 
     function renderSlot() {
       const files = mediaSlots[idx];
@@ -818,12 +848,12 @@ window.addEventListener("load", () => {
 
       files.forEach((f, i) => {
         const item = document.createElement("div");
-        item.className = "ri-file-item";
-        item.innerHTML = `<span class="ri-fname" title="${f.name}">${f.name}</span><span class="ri-fremove" data-i="${i}">✕</span>`;
+        item.className = "sf-file-item";
+        item.innerHTML = `<span class="sf-fname" title="${f.name}">${f.name}</span><span class="sf-fremove" data-i="${i}">✕</span>`;
         fileList.appendChild(item);
       });
 
-      fileList.querySelectorAll(".ri-fremove").forEach((btn) => {
+      fileList.querySelectorAll(".sf-fremove").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
           mediaSlots[idx].splice(parseInt(btn.dataset.i), 1);
@@ -872,7 +902,7 @@ window.addEventListener("load", () => {
 
     sendBtn.addEventListener("click", async () => {
       if (mediaSlots[idx].length === 0) return;
-      const label = sendBtn.querySelector(".ri-send-label");
+      const label = sendBtn.querySelector(".sf-send-label");
       label.textContent = "Enviando…";
       sendBtn.classList.remove("ready");
       injectFiles(mediaSlots[idx]);
@@ -885,10 +915,10 @@ window.addEventListener("load", () => {
   [1, 2, 3].forEach(setupSlot);
 
   // ── PANEL DROPI & CONFIG ──────────────────────────────────
-  const dropiInput = document.getElementById("ri-dropi-url");
+  const dropiInput = document.getElementById("sf-dropi-url");
   dropiInput.addEventListener("mousedown", (e) => e.stopPropagation());
 
-  document.getElementById("ri-dropi-btn").addEventListener("click", () => {
+  document.getElementById("sf-dropi-btn").addEventListener("click", () => {
     const url = dropiInput.value.trim();
     if (!url) return;
     window.open(url.startsWith("http") ? url : "https://" + url, "_blank");
@@ -896,31 +926,31 @@ window.addEventListener("load", () => {
 
   // Abrir también con Enter
   dropiInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") document.getElementById("ri-dropi-btn").click();
+    if (e.key === "Enter") document.getElementById("sf-dropi-btn").click();
   });
 
   // Load config
   chrome.storage.local.get(['apiKey', 'prompt', 'price1', 'price2', 'price3', 'dropiUrl', 'productName'], (result) => {
-    if (result.apiKey) { API_KEY = result.apiKey; document.getElementById("ri-config-apikey").value = API_KEY; }
-    if (result.prompt) { CUSTOM_PROMPT = result.prompt; document.getElementById("ri-config-prompt").value = CUSTOM_PROMPT; }
-    if (result.price1) { PRICE_1 = result.price1; document.getElementById("ri-config-price1").value = PRICE_1; }
-    if (result.price2) { PRICE_2 = result.price2; document.getElementById("ri-config-price2").value = PRICE_2; }
-    if (result.price3) { PRICE_3 = result.price3; document.getElementById("ri-config-price3").value = PRICE_3; }
-    if (result.dropiUrl) { DROPI_URL = result.dropiUrl; document.getElementById("ri-dropi-url").value = DROPI_URL; }
-    if (result.productName) { PRODUCT_NAME = result.productName; document.getElementById("ri-config-product-name").value = PRODUCT_NAME; }
+    if (result.apiKey) { API_KEY = result.apiKey; document.getElementById("sf-config-apikey").value = API_KEY; }
+    if (result.prompt) { CUSTOM_PROMPT = result.prompt; document.getElementById("sf-config-prompt").value = CUSTOM_PROMPT; }
+    if (result.price1) { PRICE_1 = result.price1; document.getElementById("sf-config-price1").value = PRICE_1; }
+    if (result.price2) { PRICE_2 = result.price2; document.getElementById("sf-config-price2").value = PRICE_2; }
+    if (result.price3) { PRICE_3 = result.price3; document.getElementById("sf-config-price3").value = PRICE_3; }
+    if (result.dropiUrl) { DROPI_URL = result.dropiUrl; document.getElementById("sf-dropi-url").value = DROPI_URL; }
+    if (result.productName) { PRODUCT_NAME = result.productName; document.getElementById("sf-config-product-name").value = PRODUCT_NAME; }
   });
 
   // Save config
-  const saveBtn = document.getElementById("ri-config-save-btn");
+  const saveBtn = document.getElementById("sf-config-save-btn");
   if (saveBtn) {
     saveBtn.addEventListener("click", () => {
-      const apiKey = document.getElementById("ri-config-apikey").value.trim();
-      const prompt = document.getElementById("ri-config-prompt").value.trim();
-      const price1 = document.getElementById("ri-config-price1").value.trim();
-      const price2 = document.getElementById("ri-config-price2").value.trim();
-      const price3 = document.getElementById("ri-config-price3").value.trim();
-      const dropiUrl = document.getElementById("ri-dropi-url").value.trim();
-      const productName = document.getElementById("ri-config-product-name").value.trim();
+      const apiKey = document.getElementById("sf-config-apikey").value.trim();
+      const prompt = document.getElementById("sf-config-prompt").value.trim();
+      const price1 = document.getElementById("sf-config-price1").value.trim();
+      const price2 = document.getElementById("sf-config-price2").value.trim();
+      const price3 = document.getElementById("sf-config-price3").value.trim();
+      const dropiUrl = document.getElementById("sf-dropi-url").value.trim();
+      const productName = document.getElementById("sf-config-product-name").value.trim();
 
       chrome.storage.local.set({ apiKey, prompt, price1, price2, price3, dropiUrl, productName }, () => {
         API_KEY = apiKey;
@@ -937,4 +967,4 @@ window.addEventListener("load", () => {
       });
     });
   }
-}); // fin load
+});
