@@ -49,7 +49,7 @@ Has confirmado tu orden de *Cinta Aislante Líquida*.
 📦 *Seguimiento:* Te enviaremos el número de guía apenas esté disponible
 📲 *Estado del pedido:* Te mantendremos informado en todo momento
 
-✨ Gracias por confiar en *Offerti* ⭐
+Gracias por confiar en *Offerti* ⭐
 
 Si tienes alguna duda, no dudes en escribirnos 😊
 `,
